@@ -122,6 +122,15 @@ span{
 #categories{
     z-index: 100;
 }
+.titlebox{
+    display: flex;
+}
+#logobox{
+    padding-top: 8px;
+}
+#logoText{
+    font-size: 14px;
+}
 
 .chosenCountry{
     font-size: 10px;
@@ -195,7 +204,7 @@ span{
     padding-top: 10px;
     font-size: 34px;
     padding-bottom: 10px;
-    line-height: 34px;
+    line-height: 30px;
 }
 .small{
     padding: 0;

@@ -290,8 +290,8 @@ to attach them to the start of each source file to most effectively
 convey the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    {description}
-    Copyright (C) {year}  {fullname}
+    The Globe of economic complexity: visualizing world exports with webGL point clouds
+    Copyright (C) 2015 Center for International Development at Harvard University
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

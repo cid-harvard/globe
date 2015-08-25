@@ -13,12 +13,6 @@ function UI() {
                 $("#fullscreen").html('<a href="#">Fullscreen Mode</a>');
                 myThis.fullscreen = false;
                 break;
-            case 70:
-             THREEx.FullScreen.request(document.body);
-            $("#fullscreen").html('<a href="#">Window Mode</a>');
-            myThis.fullscreen = true;
-            break;
-
             default:
                 return; 
         }
@@ -65,6 +59,7 @@ function UI() {
                 $("#aboutText").hide();
         });
     });
+
 
     ring=true;
     buttons = [];
