@@ -1,0 +1,211 @@
+<html>
+<head>
+  <title>The globe of economic complexity</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
+<META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+	<meta charset="utf-8">
+
+  <meta property="og:title" content="The Globe of Economic Complexity: Visualize $15 Trillion of World Exports">
+  <meta name="description" content="One dot equals $100M of exports">
+  <meta property="og:description" content="One dot equals $100M of exports">
+  <meta property="og:image" content="http://globe.cid.harvard.edu/images/preview.png">
+  <meta property="og:url" content="http://globe.cid.harvard.edu">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <link href="style.css" rel="stylesheet" type="text/css">
+  <link rel="icon" href="images/favicon.ico" />
+
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Rajdhani:300|500' rel='stylesheet' type='text/css'>
+<link href="select2.css" rel="stylesheet" type="text/css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-rc.2/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r68/three.min.js"></script>
+</head>
+
+<body >
+
+	<div id="storyPrompt">
+		<div id="description">Ever wanted to see the true scale of the world economy?<br/><br/> Visualize 15 trillion dollars of world trade. One dot equals 100 million dollars of exported products.<br/> <div id="loaded">Loading world export data...</div>
+		</div>
+		<div id="choice" style="display:none">
+			<div id='beginStory'>
+			<img src="images/icon/tour.png"/>
+			<div>Start the Intro</div>
+			<div id="loading">View an animated tour through the visualizations and concepts behind this project.</div>
+			</div>
+
+			<div><div class="midSeparator">&nbsp;</div></div>
+			<div id='beginExplore'>
+			<img src="images/icon/explore.png"/>
+			<div>Visualize Data</div>
+			<div id="loading">Skip the tour and start exploring our data</div>
+			</div>
+		</div>
+			
+	</div>
+
+	<div id="spinner"></div>
+
+	<div id="UI" style="display:none">
+
+	<div id="sideBar">
+		<div class="titleTop2">
+			<span class="small">The</span><span style="font-size:56px">GLOBE</span><br/>
+			<div class="optionSeparator">&nbsp;</div>
+			<span class="small">of</span>
+			
+			<span style="font-size:42px">ECONOMIC</span><br/>
+			<span style="font-size:36px">COMPLEXITY</span><br/>
+		</div>
+		<div class="subtitle2">$15 trillion of world trade</br>one dot = $100 million of exports</div>
+		<div class="optionSeparator">&nbsp;</div>
+		<div id="storyline">► Play Intro</div>
+		<div id="buttons">
+		<div id="countrySection">
+		<div class="optionSeparator">&nbsp;</div>
+		<div class="selectionBox">
+		<select class="countrySelection">
+		</select>
+		</div>
+		</div>
+		<div id="productSection" style="display:none">
+		<div class="optionSeparator">&nbsp;</div>
+		<div class="productBox">
+		<select class="productSelection">
+		</select>
+		</div>
+		</div>
+
+		<div class="optionSeparator">&nbsp;</div>
+		<div id="visualizations"></div>
+		<div class="optionSeparator">&nbsp;</div>
+		<div id="showAbout">About</div>
+		<div id="fullscreen">Fullscreen Mode</div>
+		<div id="showlabels">Hide Labels</div>
+		<div id="contrastbutton">High contrast</div>
+		<div id="atlasBox"></div>
+		<div class="sectionTitle" style="position:absolute;bottom:35px;">Filter by product category</div>
+	</div>
+	</div>
+
+	<div id="watch">
+		<img id="watchsvg" src="images/bluewatch.png"/>
+	</div>
+	
+	<div id="annotation"></div>
+	<div id="nextlevel">
+		<div id="nextBox">
+		<div id="nextButton">
+			<img src="images/icon/next.png"/>
+			<div class="small">Next</div>
+		</div>
+
+		<div></div>
+		<div id="skipStoryLine">
+			<img src="images/icon/stop.png"/>
+			<div class="small">Quit</div>
+		</div>
+	</div>
+	</div>
+	<div id="countries" ></div>
+	<div id="categories"></div>
+	<div id="pointer"></div>
+	<div id="modeDescription"></div>
+	<div id="productlabel"></div>
+	<div id="noWebGL" style="display:none">
+		<div id='description'>The globe of economic complexity dynamically maps out the entire world production of goods to create an economic landscape of countries around the globe.<br/> This project was built with WebGL and needs it to run properly, your current web browser is not compatible.<br/> See <a href='https://get.webgl.org/'>get.webgl.org</a> to fix this issue or enjoy the following teaser:
+		<iframe width="420" style="padding-top:30px" height="315" src="https://www.youtube.com/embed/Obuq_L2U4VU" frameborder="0" allowfullscreen></iframe>
+		</div>
+	</div>
+	<div id="aboutText" style="display:none">
+		<span class="aboutTitle">About</span><span style="float:right"><div id="closeAbout">close x  </div></span>
+		<div class="optionSeparator">&nbsp;</div>
+		<div>Built by <a href="http://www.polyfra.me/" target="_blank">Owen Cornec</a>, mentoring and concept by <a href="http://romain.vuillemot.net/" target="_blank">Romain Vuillemot</a>.</div>
+		<div class="optionSeparator">&nbsp;</div>
+		<div class="aboutTitle">The Globe of Economic Complexity</div>
+		<div>The globe of economic complexity dynamically maps out the entire world production of goods to create an economic landscape of countries around the globe.</div>
+		<div class="optionSeparator">&nbsp;</div>
+		<div class="aboutTitle">The original Atlas of Economic Complexity</div>
+		<div>The Globe is built upon The Atlas of Economic Complexity, a powerful interactive tool that enables users to visualize a country’s total trade, track how these dynamics change over time and explore growth opportunities for more than a hundred countries worldwide.<br/> For any given country, The Atlas shows which products are produced and exported; The Atlas can then use this information to suggest products a country could begin manufacturing in order to fuel economic growth. <br/>It is available at: <a href="http://atlas.cid.harvard.edu" target="_blank">http://atlas.cid.harvard.edu</a></div>
+		<div class="optionSeparator">&nbsp;</div>
+		<div class="aboutTitle">The Center for international development (CID)</div>
+		<div>CID is a university-wide research center housed at the Harvard University.<br/>Learn more here: <a href="http://www.hks.harvard.edu/centers/cid" target="_blank">http://www.hks.harvard.edu/centers/cid</a> </div>
+		<div class="optionSeparator">&nbsp;</div>
+		<div class="aboutTitle">Associated Paper</div>
+		<div>This project will be featured at the 2015 IEEE VIS conference in Chicago.<br/> Read our poster <a href="PDF/poster.pdf" target="_blank"> here</a>.</div>
+		<div class="optionSeparator">&nbsp;</div>
+		<div class="aboutTitle">Data Used</div>
+		<div>Product and trade data generated with <a href="https://github.com/cid-harvard/atlas-data" target="_blank">CID's 2012 world export data</a>, originally from the <a href="http://comtrade.un.org/" target="_blank">United Nations Comtrade database.</a></div>
+		<div class="optionSeparator">&nbsp;</div>
+		<div class="aboutTitle">Technology</div>
+		<div>This visualization was built with webGL, a new graphics library that enables to create new 3D worlds in the browser. We used Three.js, a javascript library to streamline creating and editing 3D objects.<br/>The code can be viewed in our<a href="https://github.com/cid-harvard/globe/" target="_blank"> Github repository</a></div>
+		<div class="optionSeparator">&nbsp;</div>
+		<div class="aboutTitle">Contact</div>
+		<div>For any issues, questions or enquiries, <a href="https://github.com/cid-harvard/globe/wiki/FAQ" target="_blank">read our FAQ</a> or send your thoughts to <a href="#">atlas.cid.harvard@gmail.com</a></div>
+		<div class="aboutTitle">Aknowledgements</div>
+		<div>We would like to thank Marcela Escobari, Ricardo Hausmann, Gus Wezerek, Tim Cheston and Greg Shapiro for their insight and support. Icons: Cube Divisions, Earth, World by Juan Pablo Bravo, Molecule by Swaty Shah, Coins by Ramakrishna Venkatesan, Subsystem by Alex Tai from the Noun Project</div>
+		
+	</div>
+	</div>
+
+		<script type="x-shader/x-vertex" id="vertexshader">
+
+			attribute float size;
+			attribute vec3 customColor;
+			varying vec3 vColor;
+
+			void main() {
+
+				vColor = customColor;
+
+				vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+
+				gl_PointSize = size * ( 300.0 / length( mvPosition.xyz ) );
+
+				gl_Position = projectionMatrix * mvPosition;
+
+			}
+
+		</script>
+
+		<script type="x-shader/x-fragment" id="fragmentshader">
+
+			uniform vec3 color;
+			uniform sampler2D texture;
+
+			varying vec3 vColor;
+
+			void main() {
+
+				gl_FragColor = vec4( color * vColor, 1.0 );
+
+				gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord );
+
+			}
+
+		</script>
+<script src="scripts/noWebGL.js"></script>
+<script src="scripts/spin.js"></script>
+<script src="data/anchors.js"></script>
+<script src="scripts/UI.js"></script>
+<script src="scripts/labels.js"></script>
+<script src="scripts/countrydata.js"></script>
+<script src="scripts/THREE.GeoJSON.js"></script>
+<script src='scripts/cameraControls.js'></script>
+<script src='scripts/THREE.FullScreen.js'></script>
+<script src='scripts/ParticleLinks.js'></script>
+<script src="scripts/URLparser.js"></script>
+<script src="scripts/script.js"></script>
+
+<script>
+ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-41291966-6', 'auto');
+  ga('send', 'pageview');
+</script>
+<script src='scripts/THREEx.KeyboardState.js'></script>
+
+</body>
+</html>
