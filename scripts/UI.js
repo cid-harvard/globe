@@ -168,7 +168,7 @@ var spinner = new Spinner(opts).spin(target);
 
 }
 UI.prototype.buildCategories= function(categories){
-    cats=["Animal & Animal Products","Vegetable Products","Foodstuffs","Mineral Products","Chemicals & Allied Industries","Plastics & Rubbers","Leathers and Furs","Wood & Wood Products","Textiles","Footwear & Headgear","Stone & Glass","Metals","Machinerie & Electrical","Transportation","Miscellaneous","Service"];
+    cats=["Animal & Animal Products","Vegetable Products","Foodstuffs","Mineral Products","Chemicals & Allied Industries","Plastics & Rubbers","Leathers and Furs","Wood & Wood Products","Textiles","Footwear & Headgear","Stone & Glass","Metals","Machinery & Electrical","Transportation","Miscellaneous","Service"];
     var catHTML="<table><tr>";
     $.each(categories,function(i,val){
             color=new THREE.Color(i);
