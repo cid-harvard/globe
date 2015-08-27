@@ -44,6 +44,7 @@ window.onload=function(){
     var mouseCoord={"x":0,"y":0};
     var currentZoom=0;
     var step=0;
+    var selectedNode=new THREE.Mesh(new THREE.SphereGeometry(5,24,24),new THREE.MeshBasicMaterial({transparent:true,opacity:0.2,blending:THREE.AdditiveBlending}));
     var storyMode=false;
     var filterCountry=null;
     var filterProduct=null;
@@ -301,6 +302,8 @@ function init() {
                 //$("#categories").hide();
 
             });
+            selectedNode.position.set(0,0,10000);
+            scene.add(selectedNode);
 
             renderer.domElement.addEventListener("mousemove", mouseMove);
             renderer.domElement.addEventListener("mousedown", mouseDown);
@@ -856,16 +859,19 @@ function targetNode(selectedProduct){
 
     if(currentSetup==="productsphere"){
         if(selectedProduct.x3){
+            selectedNode.position.set(selectedProduct.x3,selectedProduct.y3,selectedProduct.z3);
             cameraControls.center(selectedProduct.x3,selectedProduct.y3,selectedProduct.z3);
             cameraControls.focusCenter();
             cameraControls.setZoom(100);
         }
     }else{
+        selectedNode.position.set(selectedProduct.x,selectedProduct.y,0);
         cameraControls.center(selectedProduct.x,selectedProduct.y,0);
         cameraControls.setZoom(100);
     }
 }
 function freeNode(){
+     selectedNode.position.set(0,0,10000);
     $("#productlabel").fadeOut();
 }
 function targetCountry(co,linksOn,center){
@@ -882,6 +888,7 @@ function targetCountry(co,linksOn,center){
     case "centroids3D":
     case "gridmap":
     case "gridSphere":
+    case "towers":
     if(previousMode==="3D") {
         if(linksOn)addLinks("countries3D",co);
         if(center)cameraControls.rotate(-(target.lat * Math.PI / 180+Math.PI),-(target.lon * Math.PI / 180-Math.PI)+0.01);
@@ -2013,6 +2020,10 @@ $("#contrastbutton").click(function(){
         contrast=true;
         constantSize=true;
         changePointSize(3);
+        lines=shape.children[0];
+        for (var i = 0; i < lines.children.length; i++) {lines.children[i].material.linewidth=6};
+        lines=globe.children[2];
+        for (var i = 0; i < lines.children.length; i++) {lines.children[i].material.linewidth=6};
 
        
         
@@ -2020,6 +2031,11 @@ $("#contrastbutton").click(function(){
         $(this).html("High contrast");
         contrast=false;
         constantSize=false;
+
+        lines=shape.children[0];
+        for (var i = 0; i < lines.children.length; i++) {lines.children[i].material.linewidth=2};
+        lines=globe.children[2];
+        for (var i = 0; i < lines.children.length; i++) {lines.children[i].material.linewidth=2};
 
         animatePointSize(true);
     }
@@ -2053,12 +2069,6 @@ function changePointSize(size){
     geometry.attributes.size.needsUpdate = true;
     }
 }
-$("#logo").on("mouseover",function(){
-    $("#logotext").fadeIn();
-});
-$("#logo").on("mouseout",function(){
-    $("#logotext").fadeOut();
-});
 
 
 function StoryLine()

@@ -82,7 +82,7 @@ function UI() {
     });
     buttons.push({
         "id": "towersButton",
-        "title": "Stacks",
+        "title": "Country Stacks",
         "img": "images/icon/stacks32.png",
         "desc": "Stacks every product a country exports on a map, each row represents $2.5B"
     });
@@ -100,7 +100,7 @@ function UI() {
     });
     buttons.push({
         "id": "productButton2",
-        "title": "Stacks",
+        "title": "Product Stacks",
         "img": "images/icon/stack2.png",
         "desc": "Stacks products by category"
     });
