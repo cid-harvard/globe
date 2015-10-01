@@ -131,9 +131,9 @@ function init() {
 
             });
             geometry = new THREE.BufferGeometry();
-            
 
-            
+
+
 
             var color = new THREE.Color();
             var tetha, phi,ray=3000;
@@ -151,7 +151,7 @@ function init() {
                     linewidth:2,
                     transparent:true,
                     opacity:0.5
-                }); 
+                });
                 shape=new THREE.Object3D();
                 shape.add(temp[0]);
                 overlay=new THREE.Mesh(new THREE.PlaneGeometry(560,280,1,1),overlayMaterial);
@@ -176,7 +176,7 @@ function init() {
                     opacity:0.5
                 });
                  sphereShapeIDs=temp[1];
-                globe.add(temp[0]); 
+                globe.add(temp[0]);
                 globe.updateMatrix();
                 renderer.render(scene, camera);
 
@@ -187,7 +187,7 @@ function init() {
                     countries[co]=country;
                 });
 
-                    
+
                 $.each(planeShapeIDs,function(shapeid,shapes){
                     if(countries[shapeid])countries[shapeid]["polygons"]=planeShapeIDs[shapeid];
                 });
@@ -201,7 +201,7 @@ function init() {
                 $.each(corejson.categories,function(cid,cat){
                     categories[cid]=cat;
                 });
-            
+
             Labels=new LabelManager(countries);
 
             UserInterface.buildCategories(categories);
@@ -245,8 +245,8 @@ function init() {
             var total=0,v=0,ray=4,tetha=0;
 
             for (var i = 0; i < countryIndex; i++) {
-            $.each(countries,function(p,v){if(i==v.id){val=v;code=p;}});  
-                
+            $.each(countries,function(p,v){if(i==v.id){val=v;code=p;}});
+
                 for(var key in val["products"]){
                     productValue=val["products"][key];
                     productInfo=products[key];
@@ -291,10 +291,10 @@ function init() {
                 if(currentSetup==="productspace" || currentSetup==="productsphere" || currentSetup==="productspace3D"){
                     switcher(currentSetup,true,5);
                 }
-        
+
                 });
 
-            
+
                 $("#loaded").fadeOut();
                 $("#spinner").fadeOut('slow');
                 $('#choice').fadeIn('slow');
@@ -325,13 +325,13 @@ function init() {
                 cameraControls.zoom(10);
             }
             });
-  
+
             scene.add(new THREE.AmbientLight(0xFFFFFF));
             //scene.add(new THREE.Mesh(new THREE.IcosahedronGeometry( 5000, 6 ),new THREE.MeshBasicMaterial({color:0x151515,fog:false,wireframe:true})));
 
             zoomlock=false;
             cameraControls=new Controls(renderer.domElement,450);
-            
+
 	}
 
 function animateOverlay(percentage){
@@ -352,7 +352,7 @@ function animateOverlay(percentage){
     }
     }else{
         overlayMaterial.opacity=0;
-    }   
+    }
 }
 
 function updatePointCloud(){
@@ -433,7 +433,7 @@ function addProductLinks(circles,threeD){
                     productVector.z=val.z3;
                     cloudGeometry.vertices.push(productVector);
                     colors.push(ncolor);
-                    }    
+                    }
                 }
             }
         });
@@ -458,9 +458,9 @@ function addProductLinks(circles,threeD){
             var ncolor = new THREE.Color();
             var circleGeometry,circle,material;
             if(!threeD){
-                mesh = new THREE.SphereGeometry( 2, 8,8 );  
+                mesh = new THREE.SphereGeometry( 2, 8,8 );
             }else{
-                mesh = new THREE.CircleGeometry( radius, segments );  
+                mesh = new THREE.CircleGeometry( radius, segments );
             }
         $.each(products,function(i,val){
             if(categories[val.color].active && (!availableProducts || availableProducts[i]>dollars)){
@@ -490,12 +490,12 @@ function addProductLinks(circles,threeD){
                     newlinks.add(circle);
                     }
 
-                    
+
                 }
                 }
         });
     }
-    
+
     added={};
     $.getJSON("data/network_hs.json", function(json){
         nodes=json.nodes;
@@ -507,7 +507,7 @@ function addProductLinks(circles,threeD){
             IDB=nodes[val["target"]].id.substring(2,6);
             productA=products[IDA];
             productB=products[IDB];
-            
+
             if(productA &&productB){
                 //if(categories[productA.color].active && categories[productB.color].active && (!availableProducts || (availableProducts[IDA]>dollars && availableProducts[IDB]>dollars))){
 
@@ -518,7 +518,7 @@ function addProductLinks(circles,threeD){
                         line_geom.vertices.push(new THREE.Vector3(productA.x3,productA.y3,productA.z3));
                         line_geom.vertices.push(new THREE.Vector3(productB.x3,productB.y3,productB.z3));
                 }
-               
+
             added[IDA+""+IDB]=true;
             //}
             }
@@ -527,7 +527,7 @@ function addProductLinks(circles,threeD){
 
             mergedMesh=new THREE.Line(line_geom,line_material,THREE.LinePieces);
             newlinks.add( mergedMesh );
-        
+
         scene.remove(links);
         links=newlinks.clone();
         scene.add(links);
@@ -538,7 +538,7 @@ function addProductLinks(circles,threeD){
         }
     });
     }
-    
+
 }
 
 function addLinks(type,chosenCountry){
@@ -557,7 +557,7 @@ function addLinks(type,chosenCountry){
 
     var cartx,carty,cartz,cartx2,carty2,cartz2;
     $.each(trades,function(i,exports){
-            country=countries[i];            
+            country=countries[i];
             states=anchors[i];
 
             if(country && states){
@@ -578,13 +578,13 @@ function addLinks(type,chosenCountry){
                     var lat1 = Math.min(country.lon,country2.lon)/180*Math.PI; // In radian
                     var lat2 = Math.max(country.lon,country2.lon)/180*Math.PI; // In radian
 
-                    var dLon = (lon2-lon1); 
+                    var dLon = (lon2-lon1);
 
                     var Bx = Math.cos(lat2) * Math.cos(dLon);
                     var By = Math.cos(lat2) * Math.sin(dLon);
                     var avgLat = Math.atan2(
-                            Math.sin(lat1) + 
-                            Math.sin(lat2), 
+                            Math.sin(lat1) +
+                            Math.sin(lat2),
                             Math.sqrt((
                             Math.cos(lat1)+Bx) * (Math.cos(lat1)+Bx) + By*By));
                     avgLat=avgLat*180/Math.PI;
@@ -644,9 +644,9 @@ function addLinks(type,chosenCountry){
                 //links.add(line);
                 if(chosenCountry==="ALL")return false;
                 }
-                
-            });    
-            } 
+
+            });
+            }
     });
 
     links=Particlelinks.getMesh();
@@ -656,30 +656,30 @@ function addLinks(type,chosenCountry){
 function Spline(controlPoints,colorHex,width){
     var numPoints=40;
 
-    
-    var material = new THREE.LineDashedMaterial( { 
-        dashSize: 1, 
+
+    var material = new THREE.LineDashedMaterial( {
+        dashSize: 1,
         gapSize: 100,
         colorHex:colorHex,
         transparent:true,
         opacity:0.8,
         vertexColors:true,
-        linewidth:width+1 
+        linewidth:width+1
     })
     var colors=[];
     var spline = new THREE.SplineCurve3(controlPoints);
     var geometry = new THREE.Geometry();
     var splinePoints=spline.getPoints( 100 );
     for(var i = 0; i < splinePoints.length; i++){
-        geometry.vertices.push(splinePoints[i]); 
-        colors[i]= new THREE.Color(); 
+        geometry.vertices.push(splinePoints[i]);
+        colors[i]= new THREE.Color();
         colors[i].setHSL(0.5,0.2,i/100);
     }
     geometry.colors=colors;
 
 
     return (new THREE.Line(geometry, material,THREE.LinePieces));
-    
+
 }
 function animateLinks(){
     switch(currentSetup){
@@ -691,7 +691,7 @@ function animateLinks(){
     case "gridmap":
     case "gridSphere":
     Particlelinks.animate();
-    
+
     break;
 }
 }
@@ -728,7 +728,7 @@ function changeColor(co,white){
             }
         }else{
             v+=o.particles;
-        } 
+        }
     });
     geometry.attributes.customColor.needsUpdate=true;
 }
@@ -740,11 +740,11 @@ function mouseMove(e){
 
     if(isDragging){
         UserInterface.changeCursor("grabbing",cameraControls.isLocked());
-        if(previousMode==="3D" || currentSetup==="towers")cameraControls.setTarget(mouseCoord.x-moveX,mouseCoord.y-moveY);  
+        if(previousMode==="3D" || currentSetup==="towers")cameraControls.setTarget(mouseCoord.x-moveX,mouseCoord.y-moveY);
         mouseCoord.x=moveX;
         mouseCoord.y=moveY;
     }else if(!storyMode){
-       
+
     if(loaded){
     var mouseX = e.clientX / window.innerWidth * 2 - 1;
     var mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
@@ -764,7 +764,7 @@ function mouseMove(e){
             if (intersects[u].distanceToRay < i) {
                 i = intersects[u].distanceToRay;
                 if (this.INTERSECTED != intersects[u].index && intersects[u].distance<cameraDistance-globeSize/5) {
-                    this.INTERSECTED = intersects[u].index;    
+                    this.INTERSECTED = intersects[u].index;
                 }
 
             }
@@ -772,9 +772,9 @@ function mouseMove(e){
     } else if (this.INTERSECTED !== null) {
         this.INTERSECTED = null;
         highLightCountry(null,false);
-        
+
     }
-    
+
     if(this.INTERSECTED ){
         if(selectedID!==this.INTERSECTED){
             selectedID=this.INTERSECTED;
@@ -789,7 +789,7 @@ function mouseMove(e){
         selectedID=null;
         highLightCountry(null,false);
     }
-    
+
 
     }
     }
@@ -801,7 +801,7 @@ function highLightCountry(country,on){
                 currentMesh=scene.getObjectById(countryOverlay[i],true);
                 if(currentMesh){
                     currentMesh.material.linewidth=1;
-                    currentMesh.material.opacity=0.6; 
+                    currentMesh.material.opacity=0.6;
                 }
         };
     }
@@ -893,14 +893,14 @@ function targetCountry(co,linksOn,center){
         if(linksOn)addLinks("countries3D",co);
         if(center)cameraControls.rotate(-(target.lat * Math.PI / 180+Math.PI),-(target.lon * Math.PI / 180-Math.PI)+0.01);
         //console.log(countries[co].lat * Math.PI / 180+Math.PI+" "+(countries[co].lon * Math.PI / 180+Math.PI);
-    }else{ 
+    }else{
         if(linksOn)addLinks("countries2D",co);
         cameraControls.center(target.lat*1.55,target.lon*1.55,0);
     }
 
-    
+
     if(!storyMode){
-        $("#atlasBox").html("<div class='optionSeparator'>&nbsp;</div><div class='sectionTitle'>Click to view more exports details using the Atlas:</div><a target='blank' href='http://atlas.cid.harvard.edu/explore/tree_map/export/"+target.iso.toLowerCase()+"/all/show/2012/'><img src='images/atlasimages/"+co+".png' id='treeMapImage' onError=\"this.onerror=null;this.src='images/noimage.png';\"/></a></div>");
+        $("#atlasBox").html("<div class='optionSeparator'>&nbsp;</div><div class='sectionTitle'>Click to view more exports:</div><a target='blank' href='http://atlas.cid.harvard.edu/explore/tree_map/export/"+target.iso.toLowerCase()+"/all/show/2012/'><img src='images/atlasimages/"+co+".png' id='treeMapImage' onError=\"this.onerror=null;this.src='images/noimage.png';\"/></a></div>");
         $("#atlasBox").stop().fadeIn();
     }
 
@@ -959,7 +959,7 @@ function hideCategories(){
                 }
             }
             }
-            
+
         }
         loaded=true;
 }
@@ -978,20 +978,20 @@ function switcher(to,reset,incremental){
         cameraSpeed=5;
         shape.position.set(0,0,0);
         }
-        
+
         var v=0;
         scene.remove(globe);
         scene.remove(shape);
         scene.remove(Pgeometry);
         scene.remove(Sgeometry);
 
-       
+
         Labels.resetLabels(countries);
         zoomlock=false;
         scene.remove(links);
 
         $(".selectionBox").stop().fadeIn();
-        
+
 
     switch(to){
          case "hide":
@@ -1037,7 +1037,7 @@ function switcher(to,reset,incremental){
             $.each(countries,function(p,o){if(i==o.id){country=o;code=p;}});
             state=anchors[code];
                 for (var j = 0; j <country.particles; j++) {
-                    
+
                     if(state){
                     actuator=2+Math.random()*100;
                 randomCity=state[Math.round(Math.random()*(state.length-1))];
@@ -1047,8 +1047,8 @@ function switcher(to,reset,incremental){
                     }
                     v++;
                 }
-                
-            
+
+
         }
 
 
@@ -1072,7 +1072,7 @@ function switcher(to,reset,incremental){
                     if(xaxis>20){
                         yaxis++;
                         xaxis=0;
-                    }  
+                    }
                     destination[ v * 3 + 0 ] =  (country.lat)*1.55+xaxis*boxSize+Math.random()*boxSize*0.9;
                     destination[ v * 3 + 1 ] =  (country.lon)*1.55+yaxis*boxSize+Math.random()*boxSize*0.9;
                     destination[ v * 3 + 2 ] = 0;
@@ -1107,7 +1107,7 @@ function switcher(to,reset,incremental){
                 total+=country["products"][key];
             }
             }
-            
+
         }
 
         loaded=true;
@@ -1135,13 +1135,13 @@ function switcher(to,reset,incremental){
                 if(yaxis>5){
                     zaxis++;
                     yaxis=0;
-                }  
+                }
                 destination[ v * 3 + 0 ] =  (country.lat)*1.55+(xaxis-2.5)/3;
                 destination[ v * 3 + 1 ] = (country.lon)*1.55+(yaxis-2.5)/3;
                 destination[ v * 3 + 2 ] =  zaxis/3;
                     v++;
                     xaxis++;
-                } 
+                }
         }
         loaded=true;
         break;
@@ -1149,7 +1149,7 @@ function switcher(to,reset,incremental){
          previousMode="2D";
          scene.add(shape);
         var v=0;
-        
+
         loaded=false;
         zoomlock=true;
         var randomCity,code,country=null;
@@ -1157,7 +1157,7 @@ function switcher(to,reset,incremental){
             $.each(countries,function(p,o){if(i==o.id){country=o;code=p;}});
             state=anchors[code];
                 for (var j = 0; j <country.particles; j++) {
-                    
+
                     if(state){
                     randomCity=state[Math.round(Math.random()*(state.length-1))];
                     destination[ v * 3 + 0 ] =  (randomCity["lon"])*1.55;
@@ -1166,12 +1166,12 @@ function switcher(to,reset,incremental){
                     }
                     v++;
                 }
-                
-            
+
+
         }
 
         loaded=true;
-        
+
         break;
 
         case "probability3D":
@@ -1219,13 +1219,13 @@ function switcher(to,reset,incremental){
                     destination[ v * 3 + 0 ] = ray * Math.sin(theta) * Math.cos(phi)+(Math.random()-0.5)/2;
                     destination[ v * 3 + 1 ] = ray * Math.sin(theta) * Math.sin(phi)+(Math.random()-0.5)/2;
                     destination[ v * 3 + 2 ] = ray * Math.cos(theta)+(Math.random()-0.5)/2;
-              
+
                 v++;
                 //console.log(colors[products[product].color]+" "+colors[products[product].color]%5+" "+colors[products[product].color]%5)
                 }
             }
             }
-            
+
         }
         loaded=true;
         break;
@@ -1296,7 +1296,7 @@ function switcher(to,reset,incremental){
                 }
             }
             }
-            
+
         }
         loaded=true;
         break;
@@ -1334,7 +1334,7 @@ function switcher(to,reset,incremental){
         var randomCity,country=null;
         var ray=globeSize;
         //particleSystem.rotation.set(-Math.PI/2,0,-Math.PI/2);
-        
+
 
         particleSystem.position.set(0,0,0);
         var theta,phi;
@@ -1354,10 +1354,10 @@ function switcher(to,reset,incremental){
                     }
                     v++;
                 }
-                
-            
+
+
         }
-       
+
         loaded=true;
         break;
         case "gridmap":
@@ -1445,7 +1445,7 @@ function switcher(to,reset,incremental){
                             //mod=1+country.area/150000000;
                             mod=1;
                             newx2=newx2*(mod); newy2=newy2*(mod); newz2=newz2*(mod);
-                            
+
                             if (p < country.particles) {
                                 newpoint = {"x": newx + rand * (newx2 - newx),"y": newy + rand * (newy2 - newy),"z": newz + rand * (newz2 - newz)};
                                 newpoint2={"x":test[0],"y":test[2],"z":test[1]}
@@ -1465,7 +1465,7 @@ function switcher(to,reset,incremental){
                             } else {
                                 break;
                             }
-                            
+
                             }
                         }
                     }
@@ -1576,7 +1576,7 @@ function switcher(to,reset,incremental){
                             if(k===1 && code=="JP")offsetX=-10;
                             if(k===10 && code=="CA")offsetZ=20;
                             if(k===2 && code=="IT"){
-                                
+
                                 if(r<5)offsetZ=-5;
                                 if(r>25 && r<35)offsetZ=5;
                                 if(r>40 && r<47)offsetZ=-5;
@@ -1590,7 +1590,7 @@ function switcher(to,reset,incremental){
                             //mod=1+country.area/150000000;
                             mod=1;
                             newx2=newx2*(mod); newy2=newy2*(mod); newz2=newz2*(mod);
-                            
+
                             if (p < country.particles) {
                                 newpoint = {"x": newx + rand * (newx2 - newx),"y": newy + rand * (newy2 - newy),"z": newz + rand * (newz2 - newz)};
                                 len=Math.sqrt(newpoint.x*newpoint.x+newpoint.y*newpoint.y+newpoint.z*newpoint.z);
@@ -1615,7 +1615,7 @@ function switcher(to,reset,incremental){
                             } else {
                                 break;
                             }
-                            
+
                             }
                         }
                     }
@@ -1645,7 +1645,7 @@ function switcher(to,reset,incremental){
         loaded=false;
         var ray=2;
         var theta=0;
-        $.each(countries,function(i,val){ 
+        $.each(countries,function(i,val){
                 for(var key in val["products"]){
                     productValue=val["products"][key];
                     productInfo=products[key];
@@ -1653,25 +1653,25 @@ function switcher(to,reset,incremental){
                     for(var s=0;s<Math.round(productValue/dollars);s++){
                         tetha=Math.random()*Math.PI*2;
 
-                        if(!filterCountry || filterCountry==i){  
+                        if(!filterCountry || filterCountry==i){
                         destination[ v * 3 + 0 ] = productInfo.x+ray*(1-Math.random()*Math.random())*Math.cos(tetha);
                         destination[ v * 3 + 1 ] = productInfo.y+ray*(1-Math.random()*Math.random())*Math.sin(tetha);
-                        destination[ v * 3 + 2 ] = 0; 
-                        
+                        destination[ v * 3 + 2 ] = 0;
+
                         }else{
                             destination[ v * 3 + 0 ] = 0;
                         destination[ v * 3 + 1 ] = 0;
-                        destination[ v * 3 + 2 ] = 10000; 
+                        destination[ v * 3 + 2 ] = 10000;
                         }
                         v++;
                     }
                 }
             });
-        addProductLinks(true,true); 
-        loaded=true;   
-        increment=6; 
+        addProductLinks(true,true);
+        loaded=true;
+        increment=6;
         break;
-       
+
         case "productsphere":
         scene.fog = new THREE.FogExp2(0x000000, 0.002);
         increment=0;
@@ -1683,7 +1683,7 @@ function switcher(to,reset,incremental){
         }
         var v=0;
 
-        
+
         var country,code,productInfo;
         var tetha=0,phi=0;
         loaded=false;
@@ -1704,14 +1704,14 @@ function switcher(to,reset,incremental){
                             destination[ v * 3 + 1 ] = 0;
                             destination[ v * 3 + 2 ] = 10000;
                         }
-                        v++; 
-                
+                        v++;
+
                 }
             }
-            
+
         }
-        addProductLinks(true,false); 
-        loaded=true;   
+        addProductLinks(true,false);
+        loaded=true;
         increment=6;
 
 
@@ -1727,16 +1727,16 @@ function switcher(to,reset,incremental){
         loaded=false;
         var ray=3;
         var theta=0;
-        $.each(countries,function(i,val){     
+        $.each(countries,function(i,val){
                 for(var key in val["products"]){
                     productValue=val["products"][key];
                     productInfo=products[key];
                     color=new THREE.Color(productInfo.color);
                     for(var s=0;s<Math.round(productValue/dollars);s++){
                         tetha=Math.round(Math.random()*Math.PI*2*2)/2;
-                        if(!filterCountry || filterCountry==i){  
+                        if(!filterCountry || filterCountry==i){
 
-                        destination[ v * 3 + 2 ] = Math.round(Math.random()*productInfo.sales/dollars/40*3)/3; 
+                        destination[ v * 3 + 2 ] = Math.round(Math.random()*productInfo.sales/dollars/40*3)/3;
                         ray=3/(destination[ v * 3 + 2 ]+1);
                         destination[ v * 3 + 0 ] = productInfo.x+ray*Math.cos(tetha);
                         destination[ v * 3 + 1 ] = productInfo.y+ray*Math.sin(tetha);
@@ -1748,10 +1748,10 @@ function switcher(to,reset,incremental){
                         v++;
                     }
                 }
-        });  
-        addProductLinks(true,true); 
-        loaded=true;   
-        increment=6; 
+        });
+        addProductLinks(true,true);
+        loaded=true;
+        increment=6;
         break;
         case "groupby":
         previousMode="2D";
@@ -1774,7 +1774,7 @@ function switcher(to,reset,incremental){
 
                 for(var s=0;s<Math.round(country["products"][product]/dollars);s++){
                 randomCity=state[Math.round(Math.random()*(state.length-1))];
-                
+
                 destination[ v * 3 + 0 ] =  (randomCity["lon"])/3.5+(xaxis)*100-window.innerHeight/4;
                 destination[ v * 3 + 1 ] =  (randomCity["lat"])/3.5+(yaxis)*100-window.innerWidth/12;
                 destination[ v * 3 + 2 ] = 0;
@@ -1783,7 +1783,7 @@ function switcher(to,reset,incremental){
                 }
             }
             }
-            
+
         }
         loaded=true;
         break;
@@ -1795,8 +1795,8 @@ function switcher(to,reset,incremental){
         loaded=false;
         var total=0;
         boxSize=(window.innerWidth-200)/Object.keys(products).length;
-        
-        $.each(countries,function(i,val){     
+
+        $.each(countries,function(i,val){
                 for(var key in val["products"]){
                     count++;
                     productInfo=products[key];
@@ -1832,7 +1832,7 @@ function switcher(to,reset,incremental){
                 if(xaxis>20){
                     yaxis++;
                     xaxis=0;
-                }  
+                }
                     destination[ v * 3 + 0 ] =  (i*increment+xaxis*boxSize+Math.random()*boxSize-maxX/4)*0.8;
                     destination[ v * 3 + 1 ] =  yaxis*boxSize+Math.random()*boxSize-maxY/8;
                     destination[ v * 3 + 2 ] = 0;
@@ -1841,7 +1841,7 @@ function switcher(to,reset,incremental){
         }
         loaded=true;
         break;
-        
+
     }
     }
     particlesPlaced=0;
@@ -1851,12 +1851,12 @@ function switcher(to,reset,incremental){
             $("#atlasBox").stop().fadeOut();
             $("#countrySection").hide();
             $("#productSection").show();
-            
+
         }else{
             $("#atlasBox").stop().fadeIn();
             $("#countrySection").show();
             $("#productSection").hide();
-        } 
+        }
     hideCategories();
 
 
@@ -1918,7 +1918,7 @@ $("#categories").on("click",".chooseCategory",function(){
             b.active=true;
         }else{
             if(b.active)reset=false;
-            b.active=false;    
+            b.active=false;
         }
     });
     $.each(categories,function(a,b){
@@ -1929,7 +1929,7 @@ $("#categories").on("click",".chooseCategory",function(){
         if(b.active){
             $("#cat"+b.id).addClass("categorySelected");
         }
-        else{ 
+        else{
             $("#cat"+b.id).removeClass("categorySelected");
         }
         }
@@ -2003,8 +2003,8 @@ $("#storyPrompt").on("click","#beginExplore",function(){
                 targetNode(products[values[1][1]]);
             break;
         }
-        
-        
+
+
     }
 });
 $("#storyPrompt").on("click","#beginStory",function(){
@@ -2025,8 +2025,8 @@ $("#contrastbutton").click(function(){
         lines=globe.children[2];
         for (var i = 0; i < lines.children.length; i++) {lines.children[i].material.linewidth=6};
 
-       
-        
+
+
     }else{
         $(this).html("High contrast");
         contrast=false;
@@ -2048,7 +2048,7 @@ function animatePointSize(reset){
     else{
         zoom=Math.sqrt(Math.pow(camera.position.x,2)+Math.pow(camera.position.y,2)+Math.pow(camera.position.z,2));
         testZoom=Math.round(Math.log(zoom-globeSize-20));
-    } 
+    }
     levels=[0.23,0.23,0.4,0.8,1,1.3,1.35,1.38,1.4,1.41,1.413,1.4];
     if(testZoom!==currentZoom || reset){
         currentZoom=testZoom;
@@ -2105,7 +2105,7 @@ function StoryLine()
         $("#annotation").stop().fadeOut("fast", function(){
         $("#annotation").html("<span class='title'>"+story[step-1]["title"]+"</span><br/><div class='subtitle'>"+story[step-1]["subtitle"]+"</div>");
         //$("#annotation").html("<table id='table'><tr><td id='previous'>&#10094;</td><td id='centered'>"+story[step-1]["title"]+"<br/><div class='subtitle'>"+story[step-1]["subtitle"]+"</div></td><td id='previous'>&#10095;</td></tr></table>");
-        
+
         $("#annotation").stop().fadeIn("fast");
     });
          $(".selectionBox").hide();
@@ -2129,7 +2129,7 @@ function StoryLine()
         break;
         case 4:
 
-        $("#watch").stop().fadeOut("slow"); 
+        $("#watch").stop().fadeOut("slow");
 
         Labels.setLabels(true);
          $.each(categories,function(col,val){
@@ -2140,7 +2140,7 @@ function StoryLine()
 
         Labels.setLabels(true);
         cameraControls.setZoom(200);
-        
+
         break;
         case 5:
         //$("#categories").stop().fadeIn();
@@ -2158,7 +2158,7 @@ function StoryLine()
             if(col=="#FFC41C" || col=="#17becf")val.active=true;
             else val.active=false;
         })
-       
+
         break;
         case 7:
         constantSize=true;
@@ -2175,7 +2175,7 @@ function StoryLine()
     //window.setTimeout(StoryLine,story[step]["delay"]*1000);
 
      step++;
-   
+
     }else{
 
         exitStoryline();
@@ -2187,7 +2187,7 @@ function exitStoryline(){
         $("#nextlevel").stop().fadeOut();
         $("#annotation").empty();
         $("#annotation").stop().fadeOut();
-        $("#watch").stop().fadeOut("slow"); 
+        $("#watch").stop().fadeOut("slow");
         $("#sideBar").stop().fadeIn();
         $.each(categories,function(col,val){val.active=true;});
         switcher("gridSphere",false,5);
@@ -2199,7 +2199,7 @@ function exitStoryline(){
 }
 
 function animate() {
-        
+
         if(Labels)Labels.animateLabels(countries,geometry,currentSetup,particleSystem);
         if(loaded){
 
@@ -2220,17 +2220,17 @@ function animate() {
             else{
                 positions[ v * 3 + 0 ]=destination[ v * 3 + 0 ];
                 a=true;
-            } 
+            }
             if(Math.abs(positions[ v * 3 + 1 ]-destination[ v * 3 + 1 ])>error)positions[ v * 3 + 1 ] += (destination[ v * 3 + 1 ]-positions[ v * 3 + 1 ])/increment*easing;
             else{
                 positions[ v * 3 + 1 ]=destination[ v * 3 + 1 ];
                 b=true;
-            } 
+            }
             if(Math.abs(positions[ v * 3 + 2 ]-destination[ v * 3 + 2 ])>error)positions[ v * 3 + 2 ] += (destination[ v * 3 + 2 ]-positions[ v * 3 + 2 ])/increment*easing;
             else{
                 positions[ v * 3 + 2 ]=destination[ v * 3 + 2 ];
                 c=true;
-            } 
+            }
             if(a &&b &&c){
                 particlesPlaced++;
             }else{fin=false;}
@@ -2245,11 +2245,11 @@ function animate() {
                 positions[ v * 3 + 1 ]=destination[ v * 3 + 1 ];
                 positions[ v * 3 + 2 ]=destination[ v * 3 + 2 ];
             }
-        
+
         }
 
             animateOverlay(particlesPlaced/particles);
-        
+
         }else{
 
             animateOverlay(0);
