@@ -81,9 +81,9 @@ li{
 li:hover{
     border-right: 2px solid #FFF;
 }
-a:link {color:#E0E0E0;}   
-a:visited {color:#FFF;}  
-a:hover {color:#FFFFFF;}  
+a:link {color:#E0E0E0;}
+a:visited {color:#FFF;}
+a:hover {color:#FFFFFF;}
 .controls{
 	top:300;
 }
@@ -171,9 +171,9 @@ span{
     text-align: center;
     z-index: 99;
     opacity: 1;
-    -moz-background-clip: border;     
-    -webkit-background-clip: border; 
-    background-clip: border-box; 
+    -moz-background-clip: border;
+    -webkit-background-clip: border;
+    background-clip: border-box;
 }
 .categoryButton:hover{
     border-top: 10px;
@@ -201,6 +201,7 @@ span{
     padding-top: 5px;
 }
 .titleTop2{
+    padding-left: 12px;
     padding-top: 10px;
     font-size: 34px;
     padding-bottom: 10px;
@@ -443,7 +444,7 @@ top:0;
 #treemapImage{
     border-top: 1px solid #303030;
     border-bottom: 1px solid #303030;
-    width:170px; 
+    width:170px;
     height: 100px;
     opacity: 0.7;
 }
@@ -459,7 +460,7 @@ top:0;
 }
 .box{
 	font-size: 20px;
-	
+
 }
 .modeSelector{
     border: 1px solid #151515;
@@ -597,13 +598,13 @@ top:0;
     box-shadow: 0px 0px 41px 6px rgba(255,255,255,0.62);
 }
 .grab {
-    cursor: move !important; 
+    cursor: move !important;
     cursor: grab !important;
     cursor: -moz-grab !important;
     cursor: -webkit-grab !important;
 }
 
-.grabbing { 
+.grabbing {
     cursor: grabbing !important;
     cursor: -moz-grabbing !important;
     cursor: -webkit-grabbing !important;
